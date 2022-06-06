@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  ems-backend:
+    container_name: ems-backend
+    build:
+      context: ./ems-backend
+      dockerfile: Dockerfile
+    image: ems-backend:latest
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: ems
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    links:
+      - db
+
+# Production
+  ems-frontend:
+    container_name: ems-frontend
+    build:
+      context: ./ems-frontend
+      dockerfile: Dockerfile
+    image: ems-frontend:latest
+    ports:
+      - "3000:80"
+
+# # Development
+#   ems-frontend:
+#     container_name: ems-frontend
+#     build:
+#       context: ./ems-frontend
+#       dockerfile: Dockerfile-dev
+#     image: ems-frontend:latest
+#     volumes:
+#       - ./ems-frontend:/application
+#     ports:
+#       - "3000:3000"
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=ems
+      - MYSQL_ROOT_PASSWORD=root
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

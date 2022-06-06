@@ -1,0 +1,6 @@
+[submodule "ems-backend"]
+	path = ems-backend
+	url = git@github.com:Redeem-Team/ems-backend.git
+[submodule "ems-frontend"]
+	path = ems-frontend
+	url = git@github.com:Redeem-Team/ems-frontend.git

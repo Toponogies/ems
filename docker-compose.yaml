@@ -10,8 +10,8 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: root
+      DB_USER: ems
+      DB_PASSWORD: ems
       DB_NAME: ems
     ports:
       - "8080:8080"
@@ -30,28 +30,58 @@ services:
     ports:
       - "3000:80"
 
-# # Development
-#   ems-frontend:
-#     container_name: ems-frontend
-#     build:
-#       context: ./ems-frontend
-#       dockerfile: Dockerfile-dev
-#     image: ems-frontend:latest
-#     volumes:
-#       - ./ems-frontend:/application
-#     ports:
-#       - "3000:3000"
+# Development
+  # ems-frontend:
+  #   container_name: ems-frontend
+  #   build:
+  #     context: ./ems-frontend
+  #     dockerfile: Dockerfile-dev
+  #   image: ems-frontend:latest
+  #   volumes:
+  #     - ./ems-frontend:/application
+  #   ports:
+  #     - "3000:3000"
 
   db:
     image: mysql:8.0
     environment:
-      - MYSQL_DATABASE=ems
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_DATABASE: ems
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ems
+      MYSQL_PASSWORD: ems
     restart: always
     ports:
       - "3306:3306"
     volumes:
-      - db-data:/var/lib/mysql
+      - ems-db-data:/var/lib/mysql
+
+  postgres:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+
+  keycloak:
+    image: jboss/keycloak:16.1.1
+    depends_on:
+      - postgres
+    container_name: ems-keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+    ports:
+      - "4000:8080"
+    restart: always
 
 volumes:
-  db-data:
+  ems-db-data:
+  keycloak-db-data:

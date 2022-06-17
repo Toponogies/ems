@@ -31,7 +31,7 @@
   By default, Keycloak is hosted at `http://localhost:5000`. Access this URL and you should be able to login using `admin/admin`  
 - **Step 4:** Setup auth realm  
   Import the file `reals-export.json`, Keycloak will create a realm with roles and clients for you.  
-  Change `ems-frontend` client URL to your host  
+  Change `ems-frontend` and `ems-backend` client URLs to your host  
 - **Step 5:** Create users
   EMS has 2 roles: admin and viewer. Go to tab `Users` to create a user and assign it a role. Remember to setup the password also.
 

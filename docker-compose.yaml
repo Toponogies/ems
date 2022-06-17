@@ -55,31 +55,30 @@ services:
     volumes:
       - ems-db-data:/var/lib/mysql
 
-  postgres:
-    image: postgres:14.3
+  postgresql:
+    image: bitnami/postgresql:14.4.0
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
+      POSTGRESQL_PASSWORD: bn_keycloak
+      POSTGRESQL_USERNAME: bn_keycloak
+      POSTGRESQL_DATABASE: bitnami_keycloak
     volumes:
-      - keycloak-db-data:/var/lib/postgresql/data
+      - keycloak-db-data:/bitnami/postgresql
 
   keycloak:
-    image: jboss/keycloak:16.1.1
+    image: bitnami/keycloak:18.0.1
     depends_on:
-      - postgres
+      - postgresql
     container_name: ems-keycloak
     environment:
-      DB_VENDOR: postgres
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_PASSWORD: keycloak
+      KEYCLOAK_CREATE_ADMIN_USER: true
+      KEYCLOAK_DATABASE_PASSWORD: bn_keycloak
+      KEYCLOAK_ADMIN_USER: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
-      - "4000:8080"
+      - "5000:8080"
     restart: always
 
 volumes:

@@ -15,6 +15,7 @@
 - Make sure you have docker and docker-compose
 - Enable Docker Build kit in your system: `export DOCKER_BUILDKIT=1`
 - You can change services' ports in `docker-compose.yaml` file to avoid conflict, but remember to check for service configuration
+- Copy `.env.example` file in ems-frontend to `.env` and adjust the values
 
 ### Run steps
 

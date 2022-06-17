@@ -55,19 +55,6 @@
         "attributes": {}
       },
       {
-        "id": "bc2cc45c-8ee6-4e3f-962b-1b13ac553b27",
-        "name": "admin",
-        "composite": true,
-        "composites": {
-          "realm": [
-            "viewer"
-          ]
-        },
-        "clientRole": false,
-        "containerId": "ems",
-        "attributes": {}
-      },
-      {
         "id": "0d9620bb-6f18-4b22-bb0e-f1070585881a",
         "name": "default-roles-ems",
         "description": "${role_default-roles}",
@@ -96,18 +83,9 @@
         "clientRole": false,
         "containerId": "ems",
         "attributes": {}
-      },
-      {
-        "id": "da0e4c65-d3e5-41c1-99f5-071db1e240b1",
-        "name": "viewer",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "ems",
-        "attributes": {}
       }
     ],
     "client": {
-      "ems-backend": [],
       "realm-management": [
         {
           "id": "5c7447d5-6975-478b-9d7c-8c6740a7c06e",
@@ -322,6 +300,31 @@
       ],
       "security-admin-console": [],
       "admin-cli": [],
+      "login-app": [
+        {
+          "id": "71833c8a-9acc-47f2-a3fd-e254bd6eda97",
+          "name": "admin",
+          "composite": true,
+          "composites": {
+            "client": {
+              "login-app": [
+                "viewer"
+              ]
+            }
+          },
+          "clientRole": true,
+          "containerId": "deb1bdde-bf34-4a95-b090-426831604395",
+          "attributes": {}
+        },
+        {
+          "id": "e153a7f9-bb43-4b33-93a9-50a6b0fdb4f8",
+          "name": "viewer",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "deb1bdde-bf34-4a95-b090-426831604395",
+          "attributes": {}
+        }
+      ],
       "account-console": [],
       "broker": [
         {
@@ -334,7 +337,6 @@
           "attributes": {}
         }
       ],
-      "ems-frontend": [],
       "account": [
         {
           "id": "5143b117-b17b-40d5-ab7a-e1aa1d5fb828",
@@ -650,64 +652,20 @@
       ]
     },
     {
-      "id": "c028412c-5d26-4333-9bab-3ccf850373b7",
-      "clientId": "ems-backend",
-      "rootUrl": "http://localhost:8080",
-      "adminUrl": "http://localhost:8080",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "http://localhost:8080/*"
-      ],
-      "webOrigins": [
-        "http://localhost:8080"
-      ],
-      "notBefore": 0,
-      "bearerOnly": false,
-      "consentRequired": false,
-      "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": true,
-      "serviceAccountsEnabled": false,
-      "publicClient": true,
-      "frontchannelLogout": false,
-      "protocol": "openid-connect",
-      "attributes": {
-        "backchannel.logout.session.required": "true",
-        "backchannel.logout.revoke.offline.tokens": "false"
-      },
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": true,
-      "nodeReRegistrationTimeout": -1,
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access",
-        "microprofile-jwt"
-      ]
-    },
-    {
       "id": "deb1bdde-bf34-4a95-b090-426831604395",
-      "clientId": "ems-frontend",
-      "rootUrl": "http://localhost:3000",
-      "adminUrl": "http://localhost:3000",
+      "clientId": "login-app",
+      "rootUrl": "",
+      "adminUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:3000/*"
+        "http://192.168.81.39:3000/*"
       ],
       "webOrigins": [
-        "http://localhost:3000"
+        "http://192.168.81.39:8080",
+        "http://192.168.81.39:3000"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -720,8 +678,32 @@
       "frontchannelLogout": false,
       "protocol": "openid-connect",
       "attributes": {
+        "saml.force.post.binding": "false",
+        "saml.multivalued.roles": "false",
+        "frontchannel.logout.session.required": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "use.refresh.tokens": "true",
+        "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
-        "backchannel.logout.revoke.offline.tokens": "false"
+        "client_credentials.use_refresh_token": "false",
+        "require.pushed.authorization.requests": "false",
+        "saml.client.signature": "false",
+        "saml.allow.ecp.flow": "false",
+        "id.token.as.detached.signature": "false",
+        "saml.assertion.signature": "false",
+        "saml.encrypt": "false",
+        "saml.server.signature": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "saml.artifact.binding": "false",
+        "saml_force_name_id_format": "false",
+        "acr.loa.map": "{}",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "token.response.type.bearer.lower-case": "false",
+        "saml.onetimeuse.condition": "false"
       },
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": true,

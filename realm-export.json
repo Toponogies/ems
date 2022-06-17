@@ -661,11 +661,10 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://192.168.81.39:3000/*"
+        "*"
       ],
       "webOrigins": [
-        "http://192.168.81.39:8080",
-        "http://192.168.81.39:3000"
+        "*"
       ],
       "notBefore": 0,
       "bearerOnly": false,

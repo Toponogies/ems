@@ -10,9 +10,13 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: root
+      DB_USER: ems
+      DB_PASSWORD: ems
       DB_NAME: ems
+      KEYCLOAK_HOST: 192.168.81.39
+      KEYCLOAK_PORT: 5000
+      KEYCLOAK_CLIENT: login-app
+      KEYCLOAK_REALM: ems
     ports:
       - "8080:8080"
     depends_on:
@@ -30,28 +34,57 @@ services:
     ports:
       - "3000:80"
 
-# # Development
-#   ems-frontend:
-#     container_name: ems-frontend
-#     build:
-#       context: ./ems-frontend
-#       dockerfile: Dockerfile-dev
-#     image: ems-frontend:latest
-#     volumes:
-#       - ./ems-frontend:/application
-#     ports:
-#       - "3000:3000"
+# Development
+  # ems-frontend:
+  #   container_name: ems-frontend
+  #   build:
+  #     context: ./ems-frontend
+  #     dockerfile: Dockerfile-dev
+  #   image: ems-frontend:latest
+  #   volumes:
+  #     - ./ems-frontend:/application
+  #   ports:
+  #     - "3000:3000"
 
   db:
     image: mysql:8.0
     environment:
-      - MYSQL_DATABASE=ems
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_DATABASE: ems
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ems
+      MYSQL_PASSWORD: ems
     restart: always
     ports:
       - "3306:3306"
     volumes:
-      - db-data:/var/lib/mysql
+      - ems-db-data:/var/lib/mysql
+
+  postgresql:
+    image: bitnami/postgresql:14.4.0
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_PASSWORD: bn_keycloak
+      POSTGRESQL_USERNAME: bn_keycloak
+      POSTGRESQL_DATABASE: bitnami_keycloak
+    volumes:
+      - keycloak-db-data:/bitnami/postgresql
+
+  keycloak:
+    image: bitnami/keycloak:18.0.1
+    depends_on:
+      - postgresql
+    container_name: ems-keycloak
+    environment:
+      KEYCLOAK_CREATE_ADMIN_USER: true
+      KEYCLOAK_DATABASE_PASSWORD: bn_keycloak
+      KEYCLOAK_ADMIN_USER: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "5000:8080"
+    restart: always
 
 volumes:
-  db-data:
+  ems-db-data:
+  keycloak-db-data:

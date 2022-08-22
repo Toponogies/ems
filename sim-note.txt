@@ -1,0 +1,17 @@
+1. Setup vlan
+sudo modprobe 8021q
+sudo ip link add link enp6s0f1 name enp6s0f1.1 type vlan id 1
+sudo ip addr add 10.0.0.1/24 dev enp6s0f1.1
+sudo ip link set up enp6s0f1.1
+
+2. Create sim
+cd /opt/accedian/simulator/scripts
+./setup_interface.sh -p 10.0 -i enp6s0f1.1 -s 1 -n 3 -x 10
+
+3. Edit neprofiles.xml
+
+4. Restart
+./restart.sh
+
+5. Access
+ssh -T -p 12022 admin@[IP address]

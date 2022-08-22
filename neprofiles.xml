@@ -1,0 +1,1543 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE xml>
+<nesProfiles>
+    <setup>
+        <nbCollectors>5</nbCollectors>
+        <collectionSize>20</collectionSize>
+        <baseIpAddress>10.0.1.1</baseIpAddress>
+        <baseIpV6Prefix>fe80::ffff</baseIpV6Prefix>
+        <defaultNetMask>false</defaultNetMask>
+        <defaultProfile>GT</defaultProfile>
+    </setup>
+    <!-- <group>
+        <baseIpAddress>10.10.1.1</baseIpAddress>
+        <endIpAddress>10.10.1.10</endIpAddress>
+        <profileName>VCX-Rehoming</profileName>
+        <errorSetting>true</errorSetting>
+        <rehomingRandomError>
+            <randomError>false</randomError>
+            <noOfRandomError>0</noOfRandomError>
+            <noOfRehomingRD>500</noOfRehomingRD>
+        </rehomingRandomError>
+        <issueType>existing_instance</issueType>
+        <entityType>cos-profiles</entityType>
+        <entityName>pcp1</entityName>
+    </group>-->
+    <group>
+        <baseIpAddress>10.0.2.1</baseIpAddress>
+        <endIpAddress>10.0.2.10</endIpAddress>
+        <profileName>VCX</profileName>
+    </group>
+    <group>
+        <baseIpAddress>10.0.3.1</baseIpAddress>
+        <endIpAddress>10.0.3.10</endIpAddress>
+        <profileName>LXS</profileName>
+    </group>
+
+    <!-- Note: Users can change(add,edit,remove) any unsupported commands configuration for profile-->
+    <!-- Unsupported commands for VCX profile with firmware 2.0 -->
+    <unsupportedCommand>
+        <commands>fm show configuration,fm show sampling,fm add flow,twamp-ref add,twamp-ref show configuration stateful,twamp-ref show configuration stateless,sync-session show</commands>
+        <profileName>VCX</profileName>
+    </unsupportedCommand>
+    <!-- Unsupported commands for VCX-20.05 profile with firmware 20.05 -->
+    <unsupportedCommand>
+        <commands>configuration import remote-device,configuration export remote-device</commands>
+        <profileName>VCX-20.05</profileName>
+    </unsupportedCommand>
+    <!-- Unsupported commands for TE profile with firmware 6.4.3 -->
+    <unsupportedCommand>
+        <commands>cfm show dmm-test-id-tlv,cfm edit dmm-test-id-tlv</commands>
+        <profileName>TE</profileName>
+    </unsupportedCommand>
+    <!-- Unsupported commands for GT profile with firmware 7.0 -->
+    <unsupportedCommand>
+        <commands>cfm show dmm-test-id-tlv,cfm edit dmm-test-id-tlv</commands>
+        <profileName>GT</profileName>
+    </unsupportedCommand>
+    <!-- Timeout command -->
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>VCX</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>VCX-20.05</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>VCX-Rehoming</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>TE</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>GT</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>GT-791</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>VFS</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <timeoutCommand>
+        <commands>board show info,sfp show</commands>
+        <profileName>FSX</profileName>
+        <timeoutPeriod>0</timeoutPeriod>
+        <timeoutPeriodNumber>0</timeoutPeriodNumber>
+    </timeoutCommand>
+    <!-- Profile for TE -->
+    <properties>
+        <family>NPE</family>
+        <profileName>TE</profileName>
+        <serialNumberPrefix>TeSN</serialNumberPrefix>
+        <firmwareVersion>AEN_6.4.3_19068</firmwareVersion>
+        <hardwareType>500-013-06:5:8:00</hardwareType>
+        <productName>AMN-1000-TE</productName>
+        <prompt>User</prompt>
+        <assembly>EDU/5PGBE-TE R1A</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <!-- User can use before="assembly" or use the display name instead of tag: after="Serial number"-->
+        <!--<customReplies>
+            <addFields command="board show info">
+                <addFieldAttributes name="Hardware info" value="199-3987383:38:39:0f:0000" after="assembly"/>
+            </addFields>
+        </customReplies>-->
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <policies>
+            <policy>
+                <policyName>Traffic-A</policyName>
+                <incomingPort>Client</incomingPort>
+                <outgoingPort>Network</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-B</policyName>
+                <incomingPort>Network</incomingPort>
+                <outgoingPort>Client</outgoingPort>
+            </policy>
+        </policies>
+        <!-- Connector Type for port should be one of the following values ONLY
+            : SFP-A, SFP-B, SFP-1, SFP-2, RJ45-A, RJ45-B, RJ45-3, RJ45-4, Management
+            If you choose an nbPort > 1, then think of providing a token in your portName
+            Otherwise a unique ID will be added to its end -->
+        <ports>
+            <port>
+                <connectorType>SFP-A*</connectorType>
+                <portName>Monitor-1</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>SFP-B</connectorType>
+                <portName>Monitor-2</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>Management</connectorType>
+                <portName>Management</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ45-A</connectorType>
+                <portName>Client</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ45-B*</connectorType>
+                <portName>Network</portName>
+                <portNumber>1</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsTe.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for GT -->
+    <properties>
+        <family>NPE</family>
+        <profileName>GT</profileName>
+        <serialNumberPrefix>GtSN</serialNumberPrefix>
+        <firmwareVersion>AMT_7.0_2123</firmwareVersion>
+        <hardwareType>GtHW</hardwareType>
+        <productName>AMN-1000-GT</productName>
+        <prompt>User</prompt>
+        <assembly>500-032004:19:22:00</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <!-- User can use before="assembly" or use the display name instead of tag: after="Serial number"-->
+        <!--<customReplies>
+            <addFields command="board show info">
+                <addFieldAttributes name="Hardware info" value="199-3987383:38:39:0f:0000" after="assembly"/>
+            </addFields>
+        </customReplies>-->
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <policies>
+            <policy>
+                <policyName>Traffic-1</policyName>
+                <incomingPort>PORT-1</incomingPort>
+                <outgoingPort>PORT-2</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-2</policyName>
+                <incomingPort>PORT-2</incomingPort>
+                <outgoingPort>PORT-1</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-3</policyName>
+                <incomingPort>PORT-3</incomingPort>
+                <outgoingPort>PORT-4</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-4</policyName>
+                <incomingPort>PORT-4</incomingPort>
+                <outgoingPort>PORT-3</outgoingPort>
+            </policy>
+        </policies>
+        <ports>
+            <port>
+                <connectorType>SFP-$id</connectorType>
+                <portName>PORT-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ45-3</connectorType>
+                <portName>PORT-3</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ45-4</connectorType>
+                <portName>PORT-4</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>Management</connectorType>
+                <portName>Management</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>---</connectorType>
+                <portName>LAG-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsGt.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for GT-791 -->
+    <properties>
+        <family>NPE</family>
+        <profileName>GT-791</profileName>
+        <serialNumberPrefix>GtSN</serialNumberPrefix>
+        <firmwareVersion>AMT_7.9.1_4246</firmwareVersion>
+        <hardwareType>GtHW</hardwareType>
+        <productName>AMN-1000-GT</productName>
+        <prompt>User</prompt>
+        <assembly>500-032004:19:23:00</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <!-- User can use before="assembly" or use the display name instead of tag: after="Serial number"-->
+        <!--<customReplies>
+            <addFields command="board show info">
+                <addFieldAttributes name="Hardware info" value="199-3987383:38:39:0f:0000" after="assembly"/>
+            </addFields>
+        </customReplies>-->
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <policies>
+            <policy>
+                <policyName>Traffic-1</policyName>
+                <incomingPort>PORT-1</incomingPort>
+                <outgoingPort>PORT-2</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-2</policyName>
+                <incomingPort>PORT-2</incomingPort>
+                <outgoingPort>PORT-1</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-3</policyName>
+                <incomingPort>PORT-3</incomingPort>
+                <outgoingPort>PORT-4</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-4</policyName>
+                <incomingPort>PORT-4</incomingPort>
+                <outgoingPort>PORT-3</outgoingPort>
+            </policy>
+        </policies>
+        <ports>
+            <port>
+                <connectorType>SFP-$id</connectorType>
+                <portName>PORT-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ45-3</connectorType>
+                <portName>PORT-3</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ45-4</connectorType>
+                <portName>PORT-4</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>Management</connectorType>
+                <portName>Management</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>---</connectorType>
+                <portName>LAG-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsGt.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for Flex -->
+    <properties>
+        <family>Flex</family>
+        <profileName>Flex-100G</profileName>
+        <serialNumberPrefix>C414-030</serialNumberPrefix>
+        <!-- nvram config -->
+        <defaultIP>10.0.0.1</defaultIP>
+        <defaultSubnetMask>255.0.0.0</defaultSubnetMask>
+        <defaultIPConfigMode>Dynamic</defaultIPConfigMode>
+        <defaultIPAllocationProtocol>DHCP</defaultIPAllocationProtocol>
+        <defaultIFName>cpu0</defaultIFName>
+        <defaultRMIFName>NONE</defaultRMIFName>
+        <configRestoreOption>Restore</configRestoreOption>
+        <configSaveOption>Remote save</configSaveOption>
+        <autoSave>Disable</autoSave>
+        <incrementalSave>Disable</incrementalSave>
+        <rollBack>Enable</rollBack>
+        <configSaveIP>10.251.10.215</configSaveIP>
+        <configSaveFileName>flexconf2.conf</configSaveFileName>
+        <configRestoreFileName>/etc/accedian/cfg/flash1/iss.conf</configRestoreFileName>
+        <pimMode>Sparse Mode</pimMode>
+        <igsForwardingMode>MAC based</igsForwardingMode>
+        <cliSerialConsole>Yes</cliSerialConsole>
+        <snmpEngineID>80.00.08.1c.04.46.53</snmpEngineID>
+        <snmpEngineBoots>55</snmpEngineBoots>
+        <defaultVlanIdentifier>1</defaultVlanIdentifier>
+        <stackPortCount>0</stackPortCount>
+        <coldStandby>Disable</coldStandby>
+        <storeDefaultValue>Disable</storeDefaultValue>
+        <vrfUniqueMac>Disable</vrfUniqueMac>
+        <hitlessRestartFlag>Disable</hitlessRestartFlag>
+        <hardwareVersion>500-173-01</hardwareVersion>
+        <softwareVersion>10.04.006.00.02</softwareVersion>
+        <firmwareVersion>AMO-100G-NG_22.04.0_1010</firmwareVersion>
+        <hardwareSerialNumber>C414-030</hardwareSerialNumber>
+        <softwareSerialNumber>1-0-</softwareSerialNumber>
+        <switchName>C414-030</switchName>
+        <rmHeartBeatMode>Internal</rmHeartBeatMode>
+        <rmRedundancyType>Hot</rmRedundancyType>
+        <rmDataPlaceType>Shared</rmDataPlaceType>
+        <rmType>OOB</rmType>
+        <npAPIMode>Synchronous</npAPIMode>
+        <timesTampMethod>TransHardware</timesTampMethod>
+        <restoreFlag>Disabled</restoreFlag>
+        <dynamicPortCount>5</dynamicPortCount>
+        <fipsOperationMode>Disabled</fipsOperationMode>
+        <restoreOption>Enable</restoreOption>
+        <bridgeMode>Provider Edge Bridge</bridgeMode>
+        <debuggingLogFileLocation> </debuggingLogFileLocation>
+        <managementPort>Enabled</managementPort>
+        <automaticPortCreateFlag>Enabled</automaticPortCreateFlag>
+        <restoreType>MSR</restoreType>
+        <imgDumpPath> </imgDumpPath>
+        <!-- lldp config -->
+        <chassisIdSubType>Mac Address</chassisIdSubType>
+        <systemDescription>AMO-100G-NG</systemDescription>
+        <systemCapabilitiesSupported>B,R</systemCapabilitiesSupported>
+        <systemCapabilitiesEnabled>B,R</systemCapabilitiesEnabled>
+        <deviceClass>Network Connectivity</deviceClass>
+        <softwareRevision>6.2.0</softwareRevision>
+        <serialNumberLldp> </serialNumberLldp>
+        <manufacturerName>Accedian</manufacturerName>
+        <modelName> </modelName>
+        <assetId>DummyId</assetId>
+        <powerDeviceType>PSE Device</powerDeviceType>
+        <powerSource>Primary</powerSource>
+        <systemContact>Accedian, Canada</systemContact>
+        <systemName>C414-030</systemName>
+        <systemLocation>Accedian, Canada</systemLocation>
+        <loggingOption>Console Logging</loggingOption>
+        <deviceUptime>1 Days, 18 Hrs, 39 Mins, 42 Secs</deviceUptime>
+        <loginAuthenticationMode>Local</loginAuthenticationMode>
+        <configSaveStatus>Not Initiated</configSaveStatus>
+        <remoteSaveStatus>Not Initiated</remoteSaveStatus>
+        <configRestoreStatus>Successful</configRestoreStatus>
+        <trafficSeparationControl>none</trafficSeparationControl>
+        <productName>Accedian Flex 100</productName>
+        <prompt>Manager</prompt>
+        <assembly>Accedian</assembly>
+        <agentServerStateEnabled>true</agentServerStateEnabled>
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+            <permissionsGroup>ptadmin</permissionsGroup>
+        </permissionsGroups>
+        <ports>
+            <port>
+                <connectorType>Xl0/$id</connectorType>
+                <portName>Xl0/$id</portName>
+                <state>up</state>
+                <lineProtocol>down</lineProtocol>
+                <bridgePortType>Provider Network Port</bridgePortType>
+                <interfaceSubType>xlEthernet</interfaceSubType>
+                <interfaceAlias>Slot0/$id</interfaceAlias>
+                <hardwareAddress>00:15</hardwareAddress>
+                <detail>MTU  1500 bytes, Full duplex, 100 Gbps,  No-Negotiation</detail>
+                <holBlockPrevention>enabled</holBlockPrevention>
+                <cpuControlledLearning>disabled</cpuControlledLearning>
+                <autoMDIX>on</autoMDIX>
+                <inputFlowControl>off</inputFlowControl>
+                <outputFlowControl>off</outputFlowControl>
+                <linkUpDownTrap>enabled</linkUpDownTrap>
+                <type>10 Base THD, 10 Base TFD, 100 Base TXHD, 100 Base TXFD, 1000 Base TFD, 10000 Base X</type>
+                <speed>10 Mbps, 100 Mbps, 1000 Mbps, 10000 Mbps</speed>
+                <duplex>Half Full</duplex>
+                <flowControl>Send, Receive</flowControl>
+                <ipAddressMethod>dynamic</ipAddressMethod>
+                <ipAddressProtocol>dhcp</ipAddressProtocol>
+                <!-- lldp config -->
+                <enableLldp>true</enableLldp>
+                <portIdSubType>Interface Alias</portIdSubType>
+                <portDescription>Ethernet Interface Port 0</portDescription>
+                <enableTxTlvs> </enableTxTlvs>
+                <!-- extended 802.3 TLV Info -->
+                <autoNegStatus>Not Supported, Disabled</autoNegStatus>
+                <advertisedCapabilityBits>0000</advertisedCapabilityBits>
+                <operationalMAUType>0</operationalMAUType>
+                <!-- link Aggregation -->
+                <capabilityStatus>Not Capable, Not In Aggregation</capabilityStatus>
+                <aggregatedPortId>0</aggregatedPortId>
+                <maximumFrameSize>1500</maximumFrameSize>
+                <!-- extended 802.1 TLV Info -->
+                <portVlanId>1</portVlanId>
+                <lldpMedAdminStatus>Disabled</lldpMedAdminStatus>
+                <!-- lldp-med capability TLV -->
+                <lldpMedTxSupported>MedCapability, NetworkPolicy, LocationIdentity, Ex-PowerViaMDI-PSE, Inventory</lldpMedTxSupported>
+                <lldpMedTxEnabled> </lldpMedTxEnabled>
+                <!-- lldp-med Network Policy TLV -->
+                <applicationType> </applicationType>
+                <unknownPolicyFlag> </unknownPolicyFlag>
+                <vlanType> </vlanType>
+                <vlanID> </vlanID>
+                <priority> </priority>
+                <dscp> </dscp>
+                <!-- lldp-med network policy TLV -->
+                <locationSubType> </locationSubType>
+                <locationInfo> </locationInfo>
+                <!-- lldp-med ex-PowerViaMDI TLV info -->
+                <powerPriority>Critical</powerPriority>
+                <powerValue>1000</powerValue>
+                <portNumber>4</portNumber>
+            </port>
+            <port>
+                <connectorType>Ex0/$id</connectorType>
+                <portName>Ex0/$id</portName>
+                <state>up</state>
+                <lineProtocol>down</lineProtocol>
+                <bridgePortType>Provider Network Port</bridgePortType>
+                <interfaceSubType>extremeEthernet</interfaceSubType>
+                <interfaceAlias>Slot0/5</interfaceAlias>
+                <hardwareAddress>00:15</hardwareAddress>
+                <detail>MTU  1500 bytes, Full duplex, 100 Gbps,  No-Negotiation</detail>
+                <holBlockPrevention>enabled</holBlockPrevention>
+                <cpuControlledLearning>disabled</cpuControlledLearning>
+                <autoMDIX>on</autoMDIX>
+                <inputFlowControl>off</inputFlowControl>
+                <outputFlowControl>off</outputFlowControl>
+                <linkUpDownTrap>enabled</linkUpDownTrap>
+                <type>10 Base THD, 10 Base TFD, 100 Base TXHD, 100 Base TXFD, 1000 Base TFD, 10000 Base X</type>
+                <speed>10 Mbps, 100 Mbps, 1000 Mbps, 10000 Mbps</speed>
+                <duplex>Half Full</duplex>
+                <flowControl>Send, Receive</flowControl>
+                <ipAddressMethod>dynamic</ipAddressMethod>
+                <ipAddressProtocol>dhcp</ipAddressProtocol>
+                <!-- lldp config -->
+                <enableLldp>true</enableLldp>
+                <portIdSubType>Interface Alias</portIdSubType>
+                <portDescription>Ethernet Interface Port 0</portDescription>
+                <enableTxTlvs> </enableTxTlvs>
+                <!-- extended 802.3 TLV Info -->
+                <autoNegStatus>Not Supported, Disabled</autoNegStatus>
+                <advertisedCapabilityBits>0000</advertisedCapabilityBits>
+                <operationalMAUType>0</operationalMAUType>
+                <!-- link Aggregation -->
+                <capabilityStatus>Not Capable, Not In Aggregation</capabilityStatus>
+                <aggregatedPortId>0</aggregatedPortId>
+                <maximumFrameSize>1500</maximumFrameSize>
+                <!-- extended 802.1 TLV Info -->
+                <portVlanId>1</portVlanId>
+                <lldpMedAdminStatus>Disabled</lldpMedAdminStatus>
+                <!-- lldp-med capability TLV -->
+                <lldpMedTxSupported>MedCapability, NetworkPolicy, LocationIdentity, Ex-PowerViaMDI-PSE, Inventory</lldpMedTxSupported>
+                <lldpMedTxEnabled></lldpMedTxEnabled>
+                <!-- lldp-med Network Policy TLV -->
+                <applicationType> </applicationType>
+                <unknownPolicyFlag> </unknownPolicyFlag>
+                <vlanType> </vlanType>
+                <vlanID> </vlanID>
+                <priority> </priority>
+                <dscp> </dscp>
+                <!-- lldp-med network policy TLV -->
+                <locationSubType> </locationSubType>
+                <locationInfo> </locationInfo>
+                <!-- lldp-med ex-PowerViaMDI TLV info -->
+                <powerPriority>Critical</powerPriority>
+                <powerValue>1000</powerValue>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>cpu0</connectorType>
+                <portName>cpu0</portName>
+                <state>up</state>
+                <lineProtocol>up</lineProtocol>
+                <bridgePortType>None</bridgePortType>
+                <interfaceSubType>Not Applicable</interfaceSubType>
+                <interfaceAlias>eth$id</interfaceAlias>
+                <hardwareAddress>00:16</hardwareAddress>
+                <detail>MTU  1500 bytes, Full duplex, 100 Gbps,  No-Negotiation</detail>
+                <holBlockPrevention>enabled</holBlockPrevention>
+                <cpuControlledLearning>disabled</cpuControlledLearning>
+                <autoMDIX>on</autoMDIX>
+                <inputFlowControl>off</inputFlowControl>
+                <outputFlowControl>off</outputFlowControl>
+                <linkUpDownTrap>enabled</linkUpDownTrap>
+                <type>10 Base THD, 10 Base TFD, 100 Base TXHD, 100 Base TXFD, 1000 Base TFD, 10000 Base X</type>
+                <speed>10 Mbps, 100 Mbps, 1000 Mbps, 10000 Mbps</speed>
+                <duplex>Half Full</duplex>
+                <flowControl>Send, Receive</flowControl>
+                <ipAddressMethod>dynamic</ipAddressMethod>
+                <ipAddressProtocol>dhcp</ipAddressProtocol>
+                <enableLldp>false</enableLldp>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>vlan2$id</connectorType>
+                <portName>vlan2$id</portName>
+                <state>up</state>
+                <lineProtocol>up</lineProtocol>
+                <bridgePortType>vlan</bridgePortType>
+                <interfaceSubType>Not Applicable</interfaceSubType>
+                <interfaceAlias>vlan</interfaceAlias>
+                <hardwareAddress>00:16</hardwareAddress>
+                <detail>MTU  1500 bytes, Full duplex, 100 Gbps,  No-Negotiation</detail>
+                <holBlockPrevention>enabled</holBlockPrevention>
+                <cpuControlledLearning>disabled</cpuControlledLearning>
+                <autoMDIX>on</autoMDIX>
+                <inputFlowControl>off</inputFlowControl>
+                <outputFlowControl>off</outputFlowControl>
+                <linkUpDownTrap>enabled</linkUpDownTrap>
+                <type>10 Base THD, 10 Base TFD, 100 Base TXHD, 100 Base TXFD, 1000 Base TFD, 10000 Base X</type>
+                <speed>10 Mbps, 100 Mbps, 1000 Mbps, 10000 Mbps</speed>
+                <duplex>Half Full</duplex>
+                <flowControl>Send, Receive</flowControl>
+                <ipAddressMethod>dynamic</ipAddressMethod>
+                <ipAddressProtocol>dhcp</ipAddressProtocol>
+                <enableLldp>false</enableLldp>
+                <portNumber>1</portNumber>
+            </port>
+        </ports>
+        <vlans>
+            <vlan>
+                <memberPorts>None</memberPorts>
+                <untaggedPorts>None</untaggedPorts>
+                <forbiddenPorts>None</forbiddenPorts>
+                <name>vlan$id</name>
+                <id>1</id>
+                <status>Permanent</status>
+                <egressEthertype>0x8100</egressEthertype>
+                <serviceType>E-LAN</serviceType>
+                <macLearningAdminStatus>Default</macLearningAdminStatus>
+                <macLearningOperStatus>Disabled</macLearningOperStatus>
+                <serviceLoopbackStatus>Disabled</serviceLoopbackStatus>
+                <vlanNumber>1</vlanNumber>
+            </vlan>
+            <vlan>
+                <memberPorts>Xl0/1, Xl0/2, Xl0/3, Ex0/1</memberPorts>
+                <untaggedPorts>None</untaggedPorts>
+                <forbiddenPorts>None</forbiddenPorts>
+                <name>vlan2$id</name>
+                <id>21</id>
+                <status>Permanent</status>
+                <egressEthertype>0x88a8</egressEthertype>
+                <serviceType>E-LAN</serviceType>
+                <macLearningAdminStatus>Default</macLearningAdminStatus>
+                <macLearningOperStatus>Enabled</macLearningOperStatus>
+                <serviceLoopbackStatus>Disabled</serviceLoopbackStatus>
+                <vlanNumber>1</vlanNumber>
+            </vlan>
+        </vlans>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsGt.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for VCX -->
+    <properties>
+        <family>VCX</family>
+        <profileName>VCX</profileName>
+        <serialNumberPrefix>VcxSN</serialNumberPrefix>
+        <firmwareVersion>VCX_2.0.0_7990</firmwareVersion>
+        <hardwareType>VcxHW</hardwareType>
+        <productName>VCX</productName>
+        <prompt>User</prompt>
+        <assembly>VcxA</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <virtualMachine>VMware version 1</virtualMachine>
+        <storageType>Four Disks</storageType>
+        <agentServerStateEnabled>true</agentServerStateEnabled>
+        <!-- User can use before="assembly" or use the display name instead of tag: after="Serial number"-->
+        <!--<customReplies>
+            <addFields command="board show info">
+                <addFieldAttributes name="Hardware info" value="199-3987383:38:39:0f:0000" after="assembly"/>
+            </addFields>
+        </customReplies>-->
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+            <permissionsGroup>ptadmin</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <!-- number of VCEs for each RD -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <!--  <policies>
+             <policy>
+                 <policyName>Traffic-1</policyName>
+                 <incomingPort>Client</incomingPort>
+                 <outgoingPort>Network</outgoingPort>
+             </policy>
+             <policy>
+                  <policyName>Traffic-2</policyName>
+                 <incomingPort>Network</incomingPort>
+                 <outgoingPort>Client</outgoingPort>
+             </policy>
+         </policies> -->
+        <!-- generates remote devices for VCX "remote-devices show more" -->
+        <remoteDevices>
+            <remoteDevice>
+                <modelName>C100-0000</modelName>
+                <deviceName>C305-0</deviceName>
+                <deviceMAC>00:13:AB:00:00:00</deviceMAC>
+                <deviceIP>1.1.1.1</deviceIP>
+                <baseIpAddress>50.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-T</deviceModel>
+                <deviceFirmware>rAFF_PMON_2.0_11519</deviceFirmware>
+                <deviceFirmwareSuite>2.0_11519</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>5</numberDevice>
+            </remoteDevice>
+        </remoteDevices>
+        <!-- generates inventory for VCX "inventory show remote-devices more" -->
+        <discoveryInventory>
+            <deviceInventory>
+                <numberInventory>10</numberInventory>
+                <serialNumber>C305-0</serialNumber>
+                <systemDescription>ANN-1000-T</systemDescription>
+                <deviceMAC>00:13:AB:00:00:00</deviceMAC>
+                <deviceIP>1.1.1.1</deviceIP>
+                <deviceType>Nano2Copper</deviceType>
+                <firmware>rATB_PMON_2.0_11519</firmware>
+                <deviceFirmwareSuite>2.0_11519</deviceFirmwareSuite>
+            </deviceInventory>
+        </discoveryInventory>
+        <ports>
+            <port>
+                <connectorType>---</connectorType>
+                <portName>LOCAL-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Default 7 days, unit is hours -->
+        <rrDataRetentionTime>168</rrDataRetentionTime>
+        <interfaces>
+            <interface>
+                <!-- Only one main interface in one device and, needn't provide baseIpV6AddressLinkLocal -->
+                <mainInterface>true</mainInterface>
+                <interfaceName>Management</interfaceName>
+                <portName>LOCAL-1</portName>
+                <!-- Below is optional for IPv6 information -->
+                <!--<enableIpv6>true</enableIpv6>
+                <enableIpv6Static>true</enableIpv6Static>
+                <baseIpV6Address0>2001:db8:0:3:1:0</baseIpV6Address0>
+                <baseIpV6Address1>2001:db8:0:3:2:0</baseIpV6Address1>-->
+            </interface>
+            <interface>
+                <!-- baseIpAddress and baseIpV6AddressLinkLocal are used for interfaces different with main interface 
+                If main interface is: 10.10.1.2 => e1 will have IP address 110.4.1.2 and IPv6 link local fe81::ffff:1:2
+                Format : 2001:db8:11b:0:0:0 or 2001::11b for baseIpV6AddressLinkLocal, baseIpV6Address0 , baseIpV6Address1 -->
+                <mainInterface>false</mainInterface>
+                <interfaceName>e1</interfaceName>
+                <portName>LOCAL-2</portName>
+                <baseIpAddress>110.4</baseIpAddress>
+                <baseIpV6AddressLinkLocal>fe81::ffff</baseIpV6AddressLinkLocal>
+                <!-- Below are optionals for IPv6 information -->
+                <!--<enableIpv6>true</enableIpv6>
+                <enableIpv6Static>true</enableIpv6Static>
+                <baseIpV6Address0>2001:db9:0:3:1:0</baseIpV6Address0>
+                <baseIpV6Address1>2001:db9:0:3:2:0</baseIpV6Address1>-->
+            </interface>
+        </interfaces>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsVcx2.4.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for VCX-20.05 -->
+    <properties>
+        <family>VCX</family>
+        <profileName>VCX-20.05</profileName>
+        <serialNumberPrefix>VcxSN</serialNumberPrefix>
+        <firmwareVersion>VCX_20.05.0_22574</firmwareVersion>
+        <hardwareType>VcxHW</hardwareType>
+        <productName>Skylight sensor: control</productName>
+        <prompt>User</prompt>
+        <assembly>VcxA</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <virtualMachine>VMware version 1</virtualMachine>
+        <storageType>Four Disks</storageType>
+        <agentServerStateEnabled>true</agentServerStateEnabled>
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+            <permissionsGroup>ptadmin</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <!-- number of VCEs for each RD -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <!-- <policies>
+                 <policy>
+                     <policyName>Traffic-1</policyName>
+                     <incomingPort>Client</incomingPort>
+                     <outgoingPort>Network</outgoingPort>
+                 </policy>
+                 <policy>
+                     <policyName>Traffic-2</policyName>
+                     <incomingPort>Network</incomingPort>
+                     <outgoingPort>Client</outgoingPort>
+                 </policy>
+            </policies> -->
+        <!-- generates remote devices for VCX "remote-devices show more" -->
+        <remoteDevices>
+            <remoteDevice>
+                <modelName>C100-0000</modelName>
+                <deviceName>C405-0</deviceName>
+                <deviceMAC>00:15:AB:00:00:00</deviceMAC>
+                <deviceIP>1.1.1.1</deviceIP>
+                <baseIpAddress>60.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-T</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>C100-0001</modelName>
+                <deviceName>C406-0</deviceName>
+                <deviceMAC>10:15:AB:00:00:00</deviceMAC>
+                <deviceIP>2.1.1.1</deviceIP>
+                <baseIpAddress>70.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-CT</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>C100-0002</modelName>
+                <deviceName>C407-0</deviceName>
+                <deviceMAC>20:15:AB:00:00:00</deviceMAC>
+                <deviceIP>3.1.1.1</deviceIP>
+                <baseIpAddress>80.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-CX</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0003</modelName>
+                <deviceName>P405-0</deviceName>
+                <deviceMAC>30:15:AB:00:00:00</deviceMAC>
+                <deviceIP>4.1.1.1</deviceIP>
+                <baseIpAddress>90.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-R-AC</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0004</modelName>
+                <deviceName>P406-0</deviceName>
+                <deviceMAC>40:15:AB:00:00:00</deviceMAC>
+                <deviceIP>5.1.1.1</deviceIP>
+                <baseIpAddress>100.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-E-AC</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0005</modelName>
+                <deviceName>P407-0</deviceName>
+                <deviceMAC>50:15:AB:00:00:00</deviceMAC>
+                <deviceIP>6.1.1.1</deviceIP>
+                <baseIpAddress>101.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-R</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0006</modelName>
+                <deviceName>P408-0</deviceName>
+                <deviceMAC>60:15:AB:00:00:00</deviceMAC>
+                <deviceIP>7.1.1.1</deviceIP>
+                <baseIpAddress>102.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-ER-AC</deviceModel>
+                <deviceFirmware>rATB_PMON_20.05_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>2</numberDevice>
+            </remoteDevice>
+        </remoteDevices>
+        <!-- generates inventory for VCX "inventory show remote-devices more" -->
+        <discoveryInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>C405-0</serialNumber>
+                <systemDescription>ANN-1000-T</systemDescription>
+                <deviceMAC>00:15:AB:00:00:00</deviceMAC>
+                <deviceIP>1.1.1.1</deviceIP>
+                <deviceType>Nano2Copper</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>C406-0</serialNumber>
+                <systemDescription>ANN-1000-CT</systemDescription>
+                <deviceMAC>10:15:AB:00:00:00</deviceMAC>
+                <deviceIP>2.1.1.1</deviceIP>
+                <deviceType>Nano2Optical</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>C407-0</serialNumber>
+                <systemDescription>ANN-1000-CX</systemDescription>
+                <deviceMAC>20:15:AB:00:00:00</deviceMAC>
+                <deviceIP>3.1.1.1</deviceIP>
+                <deviceType>Nano10G</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>P405-0</serialNumber>
+                <systemDescription>ANT-1000-AX-R-AC</systemDescription>
+                <deviceMAC>30:15:AB:00:00:00</deviceMAC>
+                <deviceIP>4.1.1.1</deviceIP>
+                <deviceType>Ant2Combo</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>P406-0</serialNumber>
+                <systemDescription>ANT-1000-AX-E-AC</systemDescription>
+                <deviceMAC>40:15:AB:00:00:00</deviceMAC>
+                <deviceIP>5.1.1.1</deviceIP>
+                <deviceType>Ant2Copper</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>P407-0</serialNumber>
+                <systemDescription>ANT-1000-AX-R</systemDescription>
+                <deviceMAC>50:15:AB:00:00:00</deviceMAC>
+                <deviceIP>6.1.1.1</deviceIP>
+                <deviceType>Ant10GSFP-SFP</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>5</numberInventory>
+                <serialNumber>P408-0</serialNumber>
+                <systemDescription>ANT-1000-AX-ER-AC</systemDescription>
+                <deviceMAC>60:15:AB:00:00:00</deviceMAC>
+                <deviceIP>7.1.1.1</deviceIP>
+                <deviceType>Ant2ExtSFP-RJ45</deviceType>
+                <firmware>rATB_PMON_20.05_11243</firmware>
+                <deviceFirmwareSuite>20.05_11243</deviceFirmwareSuite>
+            </deviceInventory>
+        </discoveryInventory>
+        <ports>
+            <port>
+                <connectorType>---</connectorType>
+                <portName>LOCAL-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Default 7 days, unit is hours -->
+        <rrDataRetentionTime>168</rrDataRetentionTime>
+        <interfaces>
+            <interface>
+                <!-- Only one main interface in one device and, needn't provide baseIpV6AddressLinkLocal -->
+                <mainInterface>true</mainInterface>
+                <interfaceName>Management</interfaceName>
+                <portName>LOCAL-1</portName>
+                <!-- Below is optional for IPv6 information -->
+                <!--<enableIpv6>true</enableIpv6>
+                <enableIpv6Static>true</enableIpv6Static>
+                <baseIpV6Address0>2001:db8:0:3:1:0</baseIpV6Address0>
+                <baseIpV6Address1>2001:db8:0:3:2:0</baseIpV6Address1>-->
+            </interface>
+            <interface>
+                <!-- baseIpAddress and baseIpV6AddressLinkLocal are used for interfaces different with main interface
+                If main interface is: 10.10.1.2 => e1 will have IP address 110.4.1.2 and IPv6 link local fe81::ffff:1:2
+                Format : 2001:db8:11b:0:0:0 or 2001::11b for baseIpV6AddressLinkLocal, baseIpV6Address0 , baseIpV6Address1 -->
+                <mainInterface>false</mainInterface>
+                <interfaceName>e1</interfaceName>
+                <portName>LOCAL-2</portName>
+                <baseIpAddress>110.4</baseIpAddress>
+                <baseIpV6AddressLinkLocal>fe81::ffff</baseIpV6AddressLinkLocal>
+                <!-- Below are optionals for IPv6 information -->
+                <!--<enableIpv6>true</enableIpv6>
+                <enableIpv6Static>true</enableIpv6Static>
+                <baseIpV6Address0>2001:db9:0:3:1:0</baseIpV6Address0>
+                <baseIpV6Address1>2001:db9:0:3:2:0</baseIpV6Address1>-->
+            </interface>
+        </interfaces>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsVcx2.4.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for VCX-Rehoming -->
+    <properties>
+        <family>VCX</family>
+        <profileName>VCX-Rehoming</profileName>
+        <serialNumberPrefix>VcxSN</serialNumberPrefix>
+        <firmwareVersion>VCX_20.11.0_23547</firmwareVersion>
+        <hardwareType>VcxHW</hardwareType>
+        <productName>Skylight sensor: control</productName>
+        <prompt>User</prompt>
+        <assembly>VcxA</assembly>
+        <agentServerStateEnabled>true</agentServerStateEnabled>
+        <manufactureConfig>0000</manufactureConfig>
+        <virtualMachine>VMware version 1</virtualMachine>
+        <storageType>Four Disks</storageType>
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+            <permissionsGroup>ptadmin</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <!-- number of VCEs for each RD -->
+        <numberVCEs>1</numberVCEs>
+        <!-- Predefined functions required for PM session move -->
+        <predefinedObjects>
+            <!-- Note: maximum INTERFACE(remote-device port) = number remote devices * 2 -->
+            <predefinedObject>
+                <type>INTERFACE</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+            <!-- Note: maximum CFM V1/V2 = number remote devices -->
+            <!-- Note: CFM DOMAIN size: 8(default) + numberObject -->
+            <!-- Note: we change CFM mode:CFM-V1 or CFM-V2 for generating -->
+            <predefinedObject>
+                <type>CFM-V1</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+            <!-- Note: maximum FLOWMETER = number remote devices * 28 -->
+            <predefinedObject>
+                <type>FLOWMETER</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+            <!-- No limit for number of FLOWBROKER instance -->
+            <predefinedObject>
+                <type>FLOWBROKER</type>
+                <numberObject>35</numberObject>
+            </predefinedObject>
+            <!-- Note: maximum DMM-REFLECTOR = number remote devices -->
+            <predefinedObject>
+                <type>DMM-REFLECTOR</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+            <!-- Note: maximum TWAMP-REFLECTOR = number remote devices * 16 -->
+            <predefinedObject>
+                <type>TWAMP-REFLECTOR</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+            <!-- Note: maximum LOOPBACK = number remote devices * 2 -->
+            <predefinedObject>
+                <type>LOOPBACK</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+            <!-- Note: maximum POLICY = number remote devices -->
+            <predefinedObject>
+                <type>POLICY</type>
+                <numberObject>1000</numberObject>
+            </predefinedObject>
+        </predefinedObjects>
+        <!-- Define default policy list-->
+        <!-- <policies>
+            <policy>
+                <policyName>Traffic-1</policyName>
+                <incomingPort>Client</incomingPort>
+                <outgoingPort>Network</outgoingPort>
+            </policy>
+            <policy>
+                 <policyName>Traffic-2</policyName>
+                <incomingPort>Network</incomingPort>
+                <outgoingPort>Client</outgoingPort>
+            </policy>
+        </policies>-->
+        <!-- generates remote devices for VCX "remote-devices show more" -->
+        <remoteDevices>
+            <remoteDevice>
+                <modelName>C100-0000</modelName>
+                <deviceName>C505-0</deviceName>
+                <deviceMAC>00:15:AB:00:00:00</deviceMAC>
+                <deviceIP>1.1.1.1</deviceIP>
+                <baseIpAddress>103.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-T</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>5</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>C100-0001</modelName>
+                <deviceName>C506-0</deviceName>
+                <deviceMAC>10:15:AB:00:00:00</deviceMAC>
+                <deviceIP>2.1.1.1</deviceIP>
+                <baseIpAddress>104.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-CT</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>0</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>C100-0002</modelName>
+                <deviceName>C507-0</deviceName>
+                <deviceMAC>20:15:AB:00:00:00</deviceMAC>
+                <deviceIP>3.1.1.1</deviceIP>
+                <baseIpAddress>105.1.1.1</baseIpAddress>
+                <deviceModel>ANN-1000-CX</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>0</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0003</modelName>
+                <deviceName>P505-0</deviceName>
+                <deviceMAC>30:15:AB:00:00:00</deviceMAC>
+                <deviceIP>4.1.1.1</deviceIP>
+                <baseIpAddress>106.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-R-AC</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>0</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0004</modelName>
+                <deviceName>P506-0</deviceName>
+                <deviceMAC>40:15:AB:00:00:00</deviceMAC>
+                <deviceIP>5.1.1.1</deviceIP>
+                <baseIpAddress>107.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-E-AC</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>0</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0005</modelName>
+                <deviceName>P507-0</deviceName>
+                <deviceMAC>50:15:AB:00:00:00</deviceMAC>
+                <deviceIP>6.1.1.1</deviceIP>
+                <baseIpAddress>108.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-R</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>0</numberDevice>
+            </remoteDevice>
+            <remoteDevice>
+                <modelName>P100-0006</modelName>
+                <deviceName>P508-0</deviceName>
+                <deviceMAC>60:15:AB:00:00:00</deviceMAC>
+                <deviceIP>7.1.1.1</deviceIP>
+                <baseIpAddress>109.1.1.1</baseIpAddress>
+                <deviceModel>ANT-1000-AX-ER-AC</deviceModel>
+                <deviceFirmware>rATB_PMON_20.11_11243</deviceFirmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+                <reconnection>true</reconnection>
+                <securityKey>SE:CU:RI:TY:KE:YS</securityKey>
+                <authorize>true</authorize>
+                <connectorTypes>SFPHOST,FIBER,---,---</connectorTypes>
+                <numberDevice>0</numberDevice>
+            </remoteDevice>
+        </remoteDevices>
+        <!-- generates inventory for VCX "inventory show remote-devices more" -->
+        <discoveryInventory>
+            <deviceInventory>
+                <numberInventory>10</numberInventory>
+                <serialNumber>C505-0</serialNumber>
+                <systemDescription>ANN-1000-T</systemDescription>
+                <deviceMAC>00:15:AB:00:00:00</deviceMAC>
+                <deviceIP>1.1.1.1</deviceIP>
+                <deviceType>Nano2Copper</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>1</numberInventory>
+                <serialNumber>C506-0</serialNumber>
+                <systemDescription>ANN-1000-CT</systemDescription>
+                <deviceMAC>10:15:AB:00:00:00</deviceMAC>
+                <deviceIP>2.1.1.1</deviceIP>
+                <deviceType>Nano2Optical</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>1</numberInventory>
+                <serialNumber>C507-0</serialNumber>
+                <systemDescription>ANN-1000-CX</systemDescription>
+                <deviceMAC>20:15:AB:00:00:00</deviceMAC>
+                <deviceIP>3.1.1.1</deviceIP>
+                <deviceType>Nano10G</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>1</numberInventory>
+                <serialNumber>P505-0</serialNumber>
+                <systemDescription>ANT-1000-AX-R-AC</systemDescription>
+                <deviceMAC>30:15:AB:00:00:00</deviceMAC>
+                <deviceIP>4.1.1.1</deviceIP>
+                <deviceType>Ant2Combo</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>1</numberInventory>
+                <serialNumber>P506-0</serialNumber>
+                <systemDescription>ANT-1000-AX-E-AC</systemDescription>
+                <deviceMAC>40:15:AB:00:00:00</deviceMAC>
+                <deviceIP>5.1.1.1</deviceIP>
+                <deviceType>Ant2Copper</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>1</numberInventory>
+                <serialNumber>P507-0</serialNumber>
+                <systemDescription>ANT-1000-AX-R</systemDescription>
+                <deviceMAC>50:15:AB:00:00:00</deviceMAC>
+                <deviceIP>6.1.1.1</deviceIP>
+                <deviceType>Ant10GSFP-SFP</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+            <deviceInventory>
+                <numberInventory>1</numberInventory>
+                <serialNumber>P508-0</serialNumber>
+                <systemDescription>ANT-1000-AX-ER-AC</systemDescription>
+                <deviceMAC>60:15:AB:00:00:00</deviceMAC>
+                <deviceIP>7.1.1.1</deviceIP>
+                <deviceType>Ant2ExtSFP-RJ45</deviceType>
+                <firmware>rATB_PMON_20.11_11243</firmware>
+                <deviceFirmwareSuite>20.11_11243</deviceFirmwareSuite>
+            </deviceInventory>
+        </discoveryInventory>
+        <ports>
+            <port>
+                <connectorType>---</connectorType>
+                <portName>LOCAL-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Default 7 days, unit is hours -->
+        <rrDataRetentionTime>168</rrDataRetentionTime>
+        <interfaces>
+            <interface>
+                <!-- Only one main interface in one device and, needn't provide baseIpV6AddressLinkLocal -->
+                <mainInterface>true</mainInterface>
+                <interfaceName>Management</interfaceName>
+                <portName>LOCAL-1</portName>
+                <!-- Below is optional for IPv6 information -->
+                <!--<enableIpv6>true</enableIpv6>
+                <enableIpv6Static>true</enableIpv6Static>
+                <baseIpV6Address0>2001:db8:0:3:1:0</baseIpV6Address0>
+                <baseIpV6Address1>2001:db8:0:3:2:0</baseIpV6Address1>-->
+            </interface>
+            <interface>
+                <!-- baseIpAddress and baseIpV6AddressLinkLocal are used for interfaces
+                    different with main interface If main interface is: 10.10.1.2 => e1 will
+                    have IP address 110.4.1.2 and IPv6 link local fe81::ffff:1:2 Format : 2001:db8:11b:0:0:0
+                    or 2001::11b for baseIpV6AddressLinkLocal, baseIpV6Address0 , baseIpV6Address1 -->
+                <mainInterface>false</mainInterface>
+                <interfaceName>e1</interfaceName>
+                <portName>LOCAL-2</portName>
+                <baseIpAddress>110.4</baseIpAddress>
+                <baseIpV6AddressLinkLocal>fe81::ffff</baseIpV6AddressLinkLocal>
+                <!-- Below are optionals for IPv6 information -->
+                <!--<enableIpv6>true</enableIpv6>
+                <enableIpv6Static>true</enableIpv6Static>
+                <baseIpV6Address0>2001:db9:0:3:1:0</baseIpV6Address0>
+                <baseIpV6Address1>2001:db9:0:3:2:0</baseIpV6Address1>-->
+            </interface>
+        </interfaces>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsVcx2.4.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for VFS -->
+    <properties>
+        <family>NPE</family>
+        <profileName>VFS</profileName>
+        <serialNumberPrefix>VfsSN</serialNumberPrefix>
+        <firmwareVersion>VFS10G_1.1_34283</firmwareVersion>
+        <hardwareType>Dry-contact Input</hardwareType>
+        <productName>VEL-10G-FS</productName>
+        <prompt>User</prompt>
+        <assembly>500-018-04:9:41:00</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <!-- User can use before="assembly" or use the display name instead of tag: after="Serial number"-->
+        <!--<customReplies>
+            <addFields command="board show info">
+                <addFieldAttributes name="Hardware info" value="199-3987383:38:39:0f:0000" after="assembly"/>
+            </addFields>
+        </customReplies>-->
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <policies>
+            <policy>
+                <policyName>Traffic-1-1</policyName>
+                <incomingPort>PORT-1-1</incomingPort>
+                <outgoingPort>PORT-1-2</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-1-2</policyName>
+                <incomingPort>PORT-1-2</incomingPort>
+                <outgoingPort>PORT-1-1</outgoingPort>
+            </policy>
+        </policies>
+        <!-- Connector Type for port should be one of the following values ONLY
+            : SFP-A, SFP-B, SFP-1, SFP-2, RJ45-A, RJ45-B, RJ45-3, RJ45-4, Management
+            If you choose an nbPort > 1, then think of providing a token in your portName
+            Otherwise a unique ID will be added to its end -->
+        <ports>
+            <port>
+                <connectorType>ETH-1</connectorType>
+                <portName>ETH-1</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>ETH-2</connectorType>
+                <portName>ETH-2</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>SFP-1-$id</connectorType>
+                <portName>PORT-1-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsTe.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for FSX -->
+    <properties>
+        <family>NPE</family>
+        <profileName>FSX</profileName>
+        <serialNumberPrefix>FsxSN</serialNumberPrefix>
+        <firmwareVersion>AFM-10G-FSX_2.2_13185</firmwareVersion>
+        <hardwareType>SyncE, GPS, Dry-contact Input</hardwareType>
+        <productName>AFM-10G-FSX</productName>
+        <prompt>User</prompt>
+        <assembly>500-142-01:36:39:00</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <!-- User can use before="assembly" or use the display name instead of tag: after="Serial number"-->
+        <!--<customReplies>
+            <addFields command="board show info">
+                <addFieldAttributes name="Hardware info" value="199-3987383:38:39:0f:0000" after="assembly"/>
+            </addFields>
+        </customReplies>-->
+        <permissionsAllowedList>AllList</permissionsAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <numberVCEs>10</numberVCEs>
+        <!-- Define default policy list-->
+        <policies>
+            <policy>
+                <policyName>Traffic-1-1</policyName>
+                <incomingPort>TRAFFIC-1-1</incomingPort>
+                <outgoingPort>TRAFFIC-1-2</outgoingPort>
+            </policy>
+            <policy>
+                <policyName>Traffic-1-2</policyName>
+                <incomingPort>TRAFFIC-1-2</incomingPort>
+                <outgoingPort>TRAFFIC-1-1</outgoingPort>
+            </policy>
+        </policies>
+        <!-- Connector Type for port should be one of the following values ONLY
+            : SFP-A, SFP-B, SFP-1, SFP-2, RJ45-A, RJ45-B, RJ45-3, RJ45-4, Management
+            If you choose an nbPort > 1, then think of providing a token in your portName
+            Otherwise a unique ID will be added to its end -->
+        <ports>
+            <port>
+                <connectorType>SFP-$id</connectorType>
+                <portName>AUX-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+            <port>
+                <connectorType>SFP-5</connectorType>
+                <portName>TRAFFIC-1-1</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>SFP-6</connectorType>
+                <portName>TRAFFIC-1-2</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>Management</connectorType>
+                <portName>Management</portName>
+                <portNumber>1</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsTe.csv</alarmsListFile>
+    </properties>
+    <!-- Profile for LXS -->
+    <properties>
+        <family>NPE</family>
+        <profileName>LXS</profileName>
+        <serialNumberPrefix>LxsSN</serialNumberPrefix>
+        <firmwareVersion>AMO-10000-LT_7.9_22515</firmwareVersion>
+        <hardwareType>Dry-contact Input</hardwareType>
+        <productName>AMO-10000-LX-S</productName>
+        <prompt>User</prompt>
+        <assembly>500-172-01:41:66:00</assembly>
+        <manufactureConfig>0000</manufactureConfig>
+        <permissionAllowedList>AllList</permissionAllowedList>
+        <permissionsGroups>
+            <permissionsGroup>admin</permissionsGroup>
+            <permissionsGroup>user</permissionsGroup>
+        </permissionsGroups>
+        <!-- No limit for number of VCEs instance -->
+        <numberVCEs>10</numberVCEs>
+        <ports>
+            <!--<port>
+                <connectorType>RJ-45</connectorType>
+                <portName>Client</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ-45</connectorType>
+                <portName>Network</portName>
+                <portNumber>1</portNumber>
+            </port>-->
+            <port>
+                <connectorType>Management</connectorType>
+                <portName>Management</portName>
+                <portNumber>1</portNumber>
+            </port>
+            <port>
+                <connectorType>RJ-45</connectorType>
+                <portName>PORT-$id</portName>
+                <portNumber>6</portNumber>
+            </port>
+            <port>
+                <connectorType>SFP</connectorType>
+                <portName>Monitor-$id</portName>
+                <portNumber>2</portNumber>
+            </port>
+        </ports>
+        <pmDataRetention>
+            <oneSec>1.75</oneSec>
+            <fiveSec>3</fiveSec>
+            <tenSec>5</tenSec>
+            <thirtySec>8.5</thirtySec>
+            <oneMin>10</oneMin>
+            <fifteenMin>120</fifteenMin>
+        </pmDataRetention>
+        <!-- Correct path to alarm CSV file to override default alarms -->
+        <alarmsListFile>simconfig/alarmsTe.csv</alarmsListFile>
+    </properties>
+</nesProfiles>

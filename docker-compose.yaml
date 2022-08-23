@@ -19,6 +19,8 @@ services:
       KEYCLOAK_REALM: ems
     ports:
       - "8080:8080"
+      - "8161:8161/udp"
+      - "8162:8162"
     depends_on:
       - db
     links:
